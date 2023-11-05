@@ -62,14 +62,12 @@ class EmployeeController extends Controller
                 'message'=> 'Not found',
             ]);
         }
+        $employee->update($request->all());
         if($request->file('image')) {
             $image = $request->file('image')->getClientOriginalName();
             $path = $request->file('image')->storeAs('Employees', $image , 'Users');
-            }else{
-                $path = NULL;
-            } 
-        $employee->update($request->all());
-        $employee->image = $path;
+            $employee->image = $path;
+            }
         return response()->json([
             'message'=> 'Added successfully',
         ]);
